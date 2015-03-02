@@ -167,7 +167,7 @@ array (
             'name' => 'linkedin_id',
             'comment' => '',
             'label' => 'LinkedIn Connections',
-            'customCode' => '<button accessToken={$fields.access_token.value} linkedinID={$fields.linkedin_id.value} id="showConnections" type="button" class="btn btn-primary">Show LinkedIn Connections</button>',
+            'customCode' => '<form><input id="authCode" type="hidden" name="authCode" value="'.$_SESSION['linkedInAuthCode']->access_token.'"><input id="recordId" type="hidden" name="recordId" value="{$fields.id.value}"><input id="recordModule" type="hidden" name="recordModule" value="Leads"><button linkedinID={$fields.linkedin_id.value} id="showConnections" type="button" class="btn btn-primary">Show LinkedIn Connections</button></form>',
           ),
           1 => '',
         ),

@@ -1,13 +1,23 @@
 $(document).ready(function () {
     $("#showConnections").click(function (e) {
-        var linkedinId = $(this).attr("linkedinid");
-        var accessToken = $(this).attr("accesstoken");
+        var access_code = $("#authCode").val();
+        if(!access_code){
+            var params = {
+                "response_type": "code",
+                "client_id": "757irf9rbxfacq",
+                "redirect_uri": "http://sugar-linkedin.dev/index.php?entryPoint=linkedInCallback",
+                "state": "test"
+            };
+
+            var url = "https://www.linkedin.com/uas/oauth2/authorization" + "?" + $.param(params);
+            return window.open(url, "popupWindow", "width=600,height=600,scrollbars=yes,resizable=0");
+        }
         $.ajax({
             type: "GET",
             dataType: 'jsonp',
-            url: "https://api.linkedin.com/v1/people/"+ linkedinId +"/connections",
+            url: "https://api.linkedin.com/v1/people/~/connections",
             data: {
-                "oauth2_access_token": accessToken,
+                "oauth2_access_token": access_code,
                 "format": "jsonp",
                 "start": 0,
                 "count": 10
@@ -28,10 +38,6 @@ $(document).ready(function () {
                     }
                 }
 
-                if (connections == "") {
-                    connections = "No connections.";
-                }
-
                 var linkedin = $("#linkedinData");
                 linkedin.html(connections);
                 linkedin.dialog({
@@ -47,14 +53,15 @@ $(document).ready(function () {
     $(document).on('click', "a#showMoreConnections", function (event) {
         var page = parseInt($(this).attr("page"));
         var start = parseInt($(this).attr("start"));
+        var access_code = $("#authCode").val();
 
         $.ajax({
             type: "GET",
             async:false,
             dataType: 'jsonp',
-            url: "https://api.linkedin.com/v1/people/tggFBJqHaG/connections",
+            url: "https://api.linkedin.com/v1/people/~/connections",
             data: {
-                "oauth2_access_token": "AQVswsDh3-XiISseyYaHbI_GZn_7YsOgGE4W3m6yZvY8z4hF5quc3AhZm2W6tsXfUvNXPLv5PQ9dzPEJFDZxX7hvJbpQDHe48yZI2_gBMt8J3_uWmKlEX2s9coFlFkDY_sNV85rF0KEmWaq3ML8vvRLlmb4IfP9PTFCi7LqGlDBR3CaUxn4",
+                "oauth2_access_token": access_code,
                 "format": "jsonp",
                 "start": start,
                 "count": 10
