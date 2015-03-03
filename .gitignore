@@ -2,3 +2,4 @@
 php_error.log
 sugarcrm.log
 .htaccess
+config_override.php

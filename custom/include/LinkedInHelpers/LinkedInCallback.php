@@ -5,8 +5,8 @@ class LinkedInCallback
 {
     private $uri = "https://www.linkedin.com/uas/oauth2/accessToken";
 
-    private $clientId = "757irf9rbxfacq";
-    private $clientSecret = "KnJcFxF22xzFHjLH";
+    private $clientId = "";
+    private $clientSecret = "";
     private $redirectUri = "http://sugar-linkedin.dev/index.php?entryPoint=linkedInCallback";
     private $grantType = "authorization_code";
 
@@ -15,6 +15,11 @@ class LinkedInCallback
 
     public function __construct(array $requestData)
     {
+        global $sugar_config;
+
+        $this->id = $sugar_config['linkedInCreds']["client_id"];
+        $this->clientSecret = $sugar_config['linkedInCreds']["client_secret"];
+
         if (!empty($requestData["code"])) {
             $this->authCode = $this->exchangeAuthcodeForRequestToken($requestData["code"]);
         }

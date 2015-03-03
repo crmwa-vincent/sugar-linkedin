@@ -11,6 +11,7 @@ class CustomLeadsViewDetail extends LeadsViewDetail
 
         echo '<script type="text/javascript" src="custom/modules/Leads/LinkedInConnections.js"></script>';
         echo '<div id="linkedinData" style="display: none"></div>';
+        echo '<div id="linkedinProfile" style="display: none"></div>';
         parent::display();
     }
 
