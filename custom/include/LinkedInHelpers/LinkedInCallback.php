@@ -17,7 +17,7 @@ class LinkedInCallback
     {
         global $sugar_config;
 
-        $this->id = $sugar_config['linkedInCreds']["client_id"];
+        $this->clientId = $sugar_config['linkedInCreds']["client_id"];
         $this->clientSecret = $sugar_config['linkedInCreds']["client_secret"];
 
         if (!empty($requestData["code"])) {
@@ -50,3 +50,5 @@ class LinkedInCallback
 
 $callback = new LinkedInCallback($_REQUEST);
 $_SESSION["linkedInAuthCode"] = $callback->authCode;
+echo "<pre>";
+print_r($_SESSION["linkedInAuthCode"]);
